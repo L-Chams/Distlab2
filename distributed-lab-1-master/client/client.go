@@ -33,7 +33,10 @@ func main() {
 	addrPtr := flag.String("ip", "50.19.58.224:8030", "IP:port string to connect to")
 	flag.Parse()
 	//TODO Try to connect to the server
-	conn, _ := net.Dial("tcp", *addrPtr)
+	conn, err := net.Dial("tcp", *addrPtr)
+	if err != nil {
+		fmt.Println(err)
+	}
 	//TODO Start asynchronously reading and displaying messages
 	go read(conn)
 	//TODO Start getting and sending user messages.
