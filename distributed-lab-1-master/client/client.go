@@ -12,7 +12,10 @@ func read(conn net.Conn) {
 	//TODO In a continuous loop, read a message from the server and display it.
 	reader := bufio.NewReader(conn)
 	for {
-		msg, _ := reader.ReadString('\n')
+		msg, err := reader.ReadString('\n')
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Println(msg)
 	}
 }
@@ -23,7 +26,10 @@ func write(conn net.Conn) {
 	//conn, _ := net.Dial("tcp", "127.0.0.1:8030")
 	for {
 		fmt.Println("Enter text:")
-		text, _ := stdin.ReadString('\n')
+		text, err := stdin.ReadString('\n')
+		if err != nil {
+			fmt.Println(err)
+		}
 		fmt.Fprintln(conn, text)
 	}
 }
